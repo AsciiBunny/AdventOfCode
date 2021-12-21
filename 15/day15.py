@@ -48,8 +48,10 @@ def dijkstra_path_find(field):
     while True:
         if not visited[current]:
             for neighbour in get_neighbours(current, visited):
-                distances[neighbour] = min(distances[current] + field[neighbour], distances[neighbour])
-                hq.heappush(priorityQueue, (distances[neighbour], neighbour))
+                new_distance = distances[current] + field[neighbour]
+                if new_distance < distances[neighbour]:
+                    distances[neighbour] = new_distance
+                    hq.heappush(priorityQueue, (distances[neighbour], neighbour))
             visited[current] = 1
 
             if visited.sum() % 100 == 0:
