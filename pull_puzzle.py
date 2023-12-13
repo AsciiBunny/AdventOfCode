@@ -79,7 +79,7 @@ def setup_day_directory(puzzle, markdown, input_file):
     path = Path(f"./{YEAR}/{puzzle:02}")
     path.mkdir(parents=True, exist_ok=True)
 
-    with open(path / "markdown.md", "w") as f_md:
+    with open(path / "README.md", "w") as f_md:
         f_md.write(markdown)
 
     with open(path / "input.txt", "w") as f_input:
