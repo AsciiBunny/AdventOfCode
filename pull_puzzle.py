@@ -59,7 +59,7 @@ def extract_instructions(page):
     part_one = md(instructions[0])
     title = part_one.splitlines()[0][4:-4]
     total_markdown += "# " + title + "\n\n"
-    total_markdown += f"[{BASE_URL + page}](BASE_URL + page)\n\n"
+    total_markdown += f"[{BASE_URL + page}]({BASE_URL + page})\n\n"
     total_markdown += "## Description\n\n"
     total_markdown += "### Part One\n\n"
     total_markdown += "\n".join(part_one.splitlines()[3:])
@@ -106,3 +106,8 @@ if __name__ == '__main__':
     with open('session.txt') as f:
         session_cookie = f.read()
     main()
+
+# TODO: Fix Emphasized text in code blocks
+# https://github.com/kfarnung/aoc-to-markdown/blob/main/src/content_scripts/to-markdown.js
+# https://github.com/matthewwithanm/python-markdownify#creating-custom-converters
+# https://www.crummy.com/software/BeautifulSoup/bs4/doc/
