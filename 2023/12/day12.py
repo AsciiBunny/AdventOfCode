@@ -1,12 +1,12 @@
 import sys
-import time
+from functools import cache
 
 
 def read_input(filename):
     with open(f"{filename}.txt", "r") as file:
         lines = file.read().splitlines()
         lines = [line.split(" ") for line in lines]
-        lines = [[pattern, [int(number) for number in groups.split(",")]] for pattern, groups in lines]
+        lines = [(pattern, tuple(int(number) for number in groups.split(","))) for pattern, groups in lines]
         return lines
 
 
@@ -20,12 +20,9 @@ def match_pattern(pattern, test):
             return False
     return True
 
-memo = {}
 
+@cache
 def build_test(pattern, groups):
-    if (pattern, *groups) in memo:
-        return memo[(pattern, *groups)]
-
     min_required_length = sum(groups) + len(groups) - 1
     if min_required_length > len(pattern):
         return 0
@@ -47,7 +44,6 @@ def build_test(pattern, groups):
         else:
             valid_tests += 1
 
-    memo[(pattern, *groups)] = valid_tests
     return valid_tests
 
 
@@ -63,9 +59,8 @@ def part_one(lines):
 
 
 def part_two(lines):
-    for line in lines:
-        line[0] = "?".join([line[0]] * 5)
-        line[1] = line[1] * 5
+    for i, line in enumerate(lines):
+        lines[i] = ("?".join([line[0]] * 5), line[1] * 5)
 
     part_one(lines)
 
