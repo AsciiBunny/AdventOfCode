@@ -1,5 +1,6 @@
 import heapq
 
+# Todo: can be optimized by reconsidering what constitutes the "graph" we're traveling here, smaller state -> more speed
 Node = tuple[int, int, int, int]
 Grid = list[list[int]]
 
